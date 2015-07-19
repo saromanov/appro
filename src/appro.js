@@ -43,6 +43,38 @@ let NGramDict = function(listofwords, len=3){
     return map;
    }
 
+//Levenshtein distance
+let distance = function(s1, s2){
+    let length1 = s1.length;
+    let length2 = s2.length;
+    let result = {};
+    for(let i = 0;i < length1;++i){
+        for(let j = 0;j < length2;++j){
+            if(i == 0 && j == 0){
+                result[[i,j]] = 0;
+                continue;
+            }
+
+            if(i > 0 && j == 0){
+                result[[i,j]] = i;
+                continue;
+            }
+
+            if(j > 0 && i == 0){
+                result[[i,j]] = j;
+                continue;
+            }
+            let cost = 0;
+            if(s1[i] != s2[j]){
+                cost = 1;
+            }
+            result[[i,j]] = Math.min(result[[i,j-1]]+1, result[[i-1,j]]+1, result[[i-1,j-1]]+cost);
+
+        }
+    }
+    return result[[length1, length2]];
+}
+
 
 let mapToSortedList = function(map){
     let newitems = [];
