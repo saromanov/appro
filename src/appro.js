@@ -22,6 +22,16 @@ export class Appro {
         }
         return result;
     }
+
+    fit_distance(word, mis=1){
+        return this.list.filter(x => {
+            if(distance(word, x) <= mis){
+                return 1;
+            } else {
+                return 0;
+            }
+        });
+    }
 };
 
 
@@ -72,7 +82,7 @@ let distance = function(s1, s2){
 
         }
     }
-    return result[[length1, length2]];
+    return result[[length1-1, length2-1]];
 }
 
 
