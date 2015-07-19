@@ -60,12 +60,12 @@ let distance = function(s1, s2){
     let result = {};
     for(let i = 0;i < length1;++i){
         for(let j = 0;j < length2;++j){
-            if(i == 0 && j == 0){
+            if(i == 0 && j === 0){
                 result[[i,j]] = 0;
                 continue;
             }
 
-            if(i > 0 && j == 0){
+            if(i > 0 && j === 0){
                 result[[i,j]] = i;
                 continue;
             }
