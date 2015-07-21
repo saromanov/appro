@@ -7,7 +7,7 @@ export class Appro {
         this.dict = NGramDict(this.list);
     }
 
-    fit(word){
+    ngrams(word){
         let result = [];
         let ngrams = splitWord(word, this.n);
         let used = {};
@@ -22,7 +22,7 @@ export class Appro {
         return result;
     }
 
-    fit_distance(word, mis=1){
+    fuzzy(word, mis=1){
         return filter(this.list, x => {
             if(distance(word, x) <= mis){
                 return 1;
