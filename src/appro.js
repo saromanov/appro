@@ -3,12 +3,12 @@ import U, {range, each, filter, reduce} from 'underscore';
 export class Appro {
     constructor(list){
         this.list = list;
-        this.dict = NGramDict(this.list);
     }
 
     ngrams(word, n=3){
         let result = [];
         let ngrams = splitWord(word, n);
+        this.dict = NGramDict(this.list, n);
         let used = {};
         each(range(ngrams.length), ng => {
            let words = this.dict.get(ngrams[ng]);
