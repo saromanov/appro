@@ -14,8 +14,9 @@
     "search"
   ],
   "dependencies": {
+    "core-js": "^0.6.0",
     "hasha": "^1.0.1",
-    "core-js": "^0.6.0"
+    "underscore": "^1.8.3"
   },
   "devDependencies": {
     "babel": "^4.6.0",
