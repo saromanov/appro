@@ -5,7 +5,6 @@ export class Appro {
         this.list = list;
         this.n = n;
         this.dict = NGramDict(this.list);
-        console.log(this.dict);
     }
 
     fit(word){
