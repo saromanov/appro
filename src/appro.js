@@ -1,4 +1,4 @@
-
+import U, {range, each, filter, reduce} from 'underscore';
 //Set list of words to the input
 export class Appro {
     constructor(list, n){
@@ -11,19 +11,19 @@ export class Appro {
         let result = [];
         let ngrams = splitWord(word, this.n);
         let used = {};
-        for(let ng = 0;ng < ngrams.length;ng++){
-                let words = this.dict.get(ngrams[ng]);
-                words.forEach(word => {
-                    if (result.indexOf(word) == -1){
-                        result.push(word);
-                    }
-                });
-        }
+        each(range(ngrams.length), ng => {
+           let words = this.dict.get(ngrams[ng]);
+           each(words, word => {
+               if (result.indexOf(word) == -1){
+                   result.push(word);
+               }
+           });
+        });
         return result;
     }
 
     fit_distance(word, mis=1){
-        return this.list.filter(x => {
+        return filter(this.list, x => {
             if(distance(word, x) <= mis){
                 return 1;
             } else {
