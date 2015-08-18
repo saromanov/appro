@@ -1,8 +1,11 @@
 import U, {range, each, filter, reduce} from 'underscore';
 //Set list of words to the input
 export class Appro {
-    constructor(list){
+    constructor(list=[], text=''){
         this.list = list;
+        if(text != '') {
+            this.list = this.list.concat(textToList(text));
+        }
     }
 
     //Approximate search with ngrams
@@ -25,7 +28,6 @@ export class Appro {
     //Simple fuzzy search
     fuzzy(word, mis=1){
         return filter(this.list, x => {
-            console.log(word, x, distance(word, x));
             if(distance(word, x) <= mis){
                 return 1;
             } else {
@@ -113,5 +115,10 @@ let splitWord = function(word, n){
         result.push(word.substring(i, i+n));
     }
     return result;
+}
+
+let textToList = function(text) {
+    text = text.replace(/\.|,|(|,|)|/g, "");
+    return text.split(' ')
 }
 
