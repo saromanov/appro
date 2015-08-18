@@ -18,10 +18,17 @@ describe('test results based on ngrams', function(){
     });
 });
 
+describe('test results based on ngrams with text as dict', function() {
+    var model = new appro.Appro(items, text='time waits for no one.');
+    it('should return "waits"', function() {
+        assert.deepEqual(model.ngrams('waitz', n=2), ['waits']);
+    });
+});
+
 
 describe('test results based on Levenshtein distance', function(){
     var model = new appro.Appro(items);
     it('should return correct word', function(){
-        assert.deepEqual(model.fuzzy('bock'), ['back']);
+        assert.deepEqual(model.fuzzy('bock'), ['back', 'work', 'look']);
     });
 });
