@@ -117,6 +117,7 @@ let splitWord = function(word, n){
     return result;
 }
 
+//Before start, check text param to convert text to list
 let textToList = function(text) {
     text = text.replace(/\.|,|(|,|)|/g, "");
     return text.split(' ')
