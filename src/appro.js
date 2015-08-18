@@ -5,6 +5,7 @@ export class Appro {
         this.list = list;
     }
 
+    //Approximate search with ngrams
     ngrams(word, n=3){
         let result = [];
         let ngrams = splitWord(word, n);
@@ -21,8 +22,10 @@ export class Appro {
         return result;
     }
 
+    //Simple fuzzy search
     fuzzy(word, mis=1){
         return filter(this.list, x => {
+            console.log(word, x, distance(word, x));
             if(distance(word, x) <= mis){
                 return 1;
             } else {
