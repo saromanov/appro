@@ -26,9 +26,13 @@ export class Appro {
     }
 
     //Simple fuzzy search
-    fuzzy(word, mis=1){
+    fuzzy(word, mis=1, dist='lev'){
+        let distfunc = distance;
+        if(dist === 'dlev') {
+            distfunc = Damerau_Levenshtein;
+        }
         return filter(this.list, x => {
-            if(distance(word, x) <= mis){
+            if(distfunc(word, x) <= mis){
                 return 1;
             } else {
                 return 0;
