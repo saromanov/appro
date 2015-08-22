@@ -1,4 +1,6 @@
 import U, {range, each, filter, reduce} from 'underscore';
+import fs from 'fs';
+
 //Set list of words to the input
 export class Appro {
     constructor(list=[], text=''){
@@ -6,6 +8,12 @@ export class Appro {
         if(text != '') {
             this.list = this.list.concat(textToList(text));
         }
+    }
+
+    //loadfromFile provides loading and preprocessing text to list of words
+    loadFromFile(path) {
+        var data = fs.readFileSync(path, 'utf-8');
+        this.list = this.list.concat(textToList(data));
     }
 
     //Approximate search with ngrams
