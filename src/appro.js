@@ -88,6 +88,34 @@ let distance = function(s1, s2){
     return result[[length1-1, length2-1]];
 }
 
+let Damerau_Levenshtein = function(s1, s2) {
+    let length1 = s1.length;
+    let length2 = s2.length;
+    let result = {};
+    for(let i = 0;i < length1;++i) {
+        result[[i,0]] = i;
+    }
+    for(let j = 0;j < length2;++j) {
+        result[[0, j]] = j;
+    }
+
+    for(let i = 1;i < length1;++i) {
+        for(let j = 1;j < length2;j++) {
+            let cost_subs = 0;
+            if(s1[i] != s2[j]){
+                cost_subs = 1;
+            }
+            let cost_trans = 999999999;
+            if(s1[i] === s2[j-1] && s1[i-1] === s2[j]) {
+                cost_trans = 1;
+            }
+            result[[i,j]] = Math.min(result[[i,j-1]]+1, result[[i-1,j]]+1, result[[i-1,j-1]]+cost_subs, result[[i-2,j-2]]+cost_trans);
+
+        }
+    }
+    return result;
+}
+
 
 let mapToSortedList = function(map){
     let newitems = [];
