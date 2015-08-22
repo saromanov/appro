@@ -113,11 +113,13 @@ let Damerau_Levenshtein = function(s1, s2) {
             if(s1[i] === s2[j-1] && s1[i-1] === s2[j]) {
                 cost_trans = 1;
             }
-            result[[i,j]] = Math.min(result[[i,j-1]]+1, result[[i-1,j]]+1, result[[i-1,j-1]]+cost_subs, result[[i-2,j-2]]+cost_trans);
-
+            result[[i,j]] = Math.min(result[[i,j-1]]+1, result[[i-1,j]]+1, result[[i-1,j-1]]+cost_subs);
+            if(i > 1 && j > 1) {
+                result[[i,j]] = Math.min(result[[i,j]], result[[i-2,j-2]]+cost_trans);
+            }
         }
     }
-    return result;
+    return result[[length1-1, length2-1]];
 }
 
 
