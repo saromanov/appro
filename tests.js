@@ -29,6 +29,10 @@ describe('test results based on ngrams with text as dict', function() {
 describe('test results based on Levenshtein distance', function(){
     var model = new appro.Appro(items);
     it('should return correct word', function(){
-        assert.deepEqual(model.fuzzy('bock'), ['back', 'work', 'look']);
+        assert.deepEqual(model.fuzzy('bock', 1), ['back', 'work', 'look']);
+    });
+
+    it('should return one correct word', function(){
+        assert.deepEqual(model.fuzzy('bock', 1, 'dlev'), ['back', 'work', 'look']);
     });
 });
